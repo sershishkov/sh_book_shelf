@@ -10,6 +10,11 @@ mongoose.connect(config.DATABASE, { useNewUrlParser: true},()=>{
   console.log('MongoDB connected');
 });
 mongoose.set('useCreateIndex', true);
+////////////////////////////////////////////////////////////
+
+const { User } = require('./models/User');
+const { Book } = require('./models/Book');
+
 /////////////////////////////////////////////////////////////
 app.use(bodyParser.json());
 app.use(cookieParser());
