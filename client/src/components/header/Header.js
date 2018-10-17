@@ -5,7 +5,7 @@ import Nav from './sidenav/Nav';
 
  class Header extends Component {
    state = {
-     showNav:true
+     showNav:false
    }
 
    onHideNav = ()=>{
