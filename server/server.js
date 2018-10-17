@@ -14,12 +14,8 @@ mongoose.connect(config.DATABASE, {
 mongoose.set('useCreateIndex', true);
 ////////////////////////////////////////////////////////////
 
-const {
-  User
-} = require('./models/User');
-const {
-  Book
-} = require('./models/Book');
+const { User } = require('./models/User');
+const { Book } = require('./models/Book');
 const { auth } = require('./middleware/auth');
 
 /////////////////////////////////////////////////////////////
