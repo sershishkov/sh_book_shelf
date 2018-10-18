@@ -42,9 +42,18 @@ export function getBookWithReviewer(id){
             type:'GET_BOOK_WITH_REVIEWER',
             payload: response
           });
-        })
-      
+        })     
       
     });
+  }
+}
+
+export function clearBookWithReviewer (){
+  return {
+    type:'CLEAR_BOOK_WITH_REVIEWER',
+    payload: {
+      book:{},
+      reviewer:{}
+    }
   }
 }
