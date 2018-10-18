@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Route }from 'react-router-dom';
 
-import Layout from './hoc/Layout';
 import Home from './components/home/Home';
+import BookView from './components/books';
+import Layout from './hoc/Layout';
 
 
 const Routes = () => {
@@ -10,6 +11,8 @@ const Routes = () => {
     <Layout>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/books/:id" exact component={BookView} />
+
       </Switch>
     </Layout>
   );
