@@ -32,10 +32,6 @@ import { loginUser } from '../../actions';
       this.props.history.push('/user');
     }
   }
-
-  
-
-
   render() {
     let { user } = this.props;
     return (
@@ -73,7 +69,7 @@ import { loginUser } from '../../actions';
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  // console.log(state);
   return {
     user: state.user
   }
