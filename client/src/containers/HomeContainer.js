@@ -19,7 +19,7 @@ import BookItem from '../widgetsUI/BookItem';
   )
   loadmore = ()=>{
     let count = this.props.books.list.length;
-    console.log(count);
+    // console.log(count);
     this.props.dispatch(getBooks(1,count,'desc', this.props.books.list));
 
   }

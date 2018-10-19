@@ -2,7 +2,7 @@ import React from 'react';
 
 const User = (props) => {
  let user = props.user.login;
- console.log(user);
+//  console.log(user);
   return (
     <div className="user_container">
       <div className="avatar">
