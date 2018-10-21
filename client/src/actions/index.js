@@ -125,7 +125,7 @@ export function clearBook(id){
   return {
       type:'CLEAR_BOOK',
       payload:{
-        book:{},
+        book:null,
         updateBook:false,
         postDeleted:false,
         // postDeleted:false
