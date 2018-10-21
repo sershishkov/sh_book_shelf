@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getBook, updateBook, clearBook, deletePost } from '../../actions';
+import { getBook, updateBook, clearBook, deleteBook } from '../../actions';
 
  class EditBook extends PureComponent {
    state = {
@@ -21,6 +21,14 @@ import { getBook, updateBook, clearBook, deletePost } from '../../actions';
     this.props.dispatch(updateBook(this.state.formdata));
     
    }
+   deletePost = () =>{
+    this.props.dispatch(deleteBook(this.props.match.params.id));
+   }
+   redirectUser  = () =>{
+     setTimeout(()=>{
+      this.props.history.push('/user/user-reviews');
+     },1000)
+   }
 
    handleInput = (event, name)=>{
     const newFormdata = {
@@ -37,6 +45,7 @@ import { getBook, updateBook, clearBook, deletePost } from '../../actions';
    }
 
    componentWillReceiveProps(nextProps){
+     console.log(nextProps);
       let book = nextProps.books.book;
       this.setState({
         formdata:{
@@ -51,11 +60,33 @@ import { getBook, updateBook, clearBook, deletePost } from '../../actions';
 
       })
    }
+   componentWillUnmount(){
+    this.props.dispatch(clearBook());
+   }
+
 
   render() {
-    console.log(this.props)
+    let books = this.props.books;
+    // console.log(books.updateBook);
     return (
       <div className="rl_container article">
+        {
+          books.updateBook ?
+            <div className="edit_confirm">
+              Post updated , <Link to={`/books/${books.book._id}`}>
+                Click here to see your post
+              </Link>
+            </div>
+          :null
+        }
+        {
+         books.postDeleted ?
+          <div className="red_tag">
+            Post deleted
+            {this.redirectUser()}
+          </div>
+         :null
+        }
         <form onSubmit={this.submitForm}>
           <h2>Edit review</h2>
           <div className="form_element">
@@ -108,7 +139,9 @@ import { getBook, updateBook, clearBook, deletePost } from '../../actions';
           </div>
           <button type="submit">Edit review</button>
             <div className="delete_post">
-              <div className="button">
+              <div className="button"
+                onClick={this.deletePost}
+              >
                 Delete review
               </div>
             </div>
