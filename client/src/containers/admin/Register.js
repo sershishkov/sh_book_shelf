@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { getUsers, userRegister } from '../../actions';
 
- class Register extends Component {
+ class Register extends PureComponent {
    state={
      name:'',
      lastname:'',
@@ -32,7 +32,19 @@ import { getUsers, userRegister } from '../../actions';
 
   }
   componentWillReceiveProps(nextProps){
-    
+    if(nextProps.user.register === false){
+      this.setState({
+        error:'Error!!, try again!!'
+      })
+    }else{
+      this.setState({
+        name:'',
+        lastname:'',
+        email:'',
+        password:''
+        
+      })
+    }
   }
 
   submitForm =(e)=>{
@@ -40,9 +52,9 @@ import { getUsers, userRegister } from '../../actions';
     this.setState({error:''});
     this.props.dispatch(userRegister({
       name:this.state.name,
-     lastname:this.state.lastname,
-     email:this.state.email,
-     password:this.state.password
+      lastname:this.state.lastname,
+      email:this.state.email,
+      password:this.state.password
     },this.props.user.users));
   }
 
@@ -59,7 +71,7 @@ import { getUsers, userRegister } from '../../actions';
     :null
   )
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     let user = this.props.user;
     return (
       <div className="rl_container">
