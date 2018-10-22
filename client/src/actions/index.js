@@ -138,8 +138,6 @@ export function clearBook(id){
 export function loginUser({email, password}){
   const request = axios.post('/api/login',{email, password})
                   .then(response =>response.data)
-
-
   return {
     type:'USER_LOGIN',
     payload:request
@@ -152,6 +150,16 @@ export function auth(){
 
       return {
         type:'USER_AUTH',
+        payload:request
+      }  
+}
+
+export function getUsers(){
+  const request  = axios.get('/api/users')
+      .then(response => response.data);
+
+      return {
+        type:'GET_USERS',
         payload:request
       }  
 }
