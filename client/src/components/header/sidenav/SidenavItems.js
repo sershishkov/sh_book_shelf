@@ -1,9 +1,10 @@
 import React from 'react';
 import {  Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
+import { connect } from 'react-redux';
 
 
-const SidenavItems = () => {
+const SidenavItems = ({user}) => {
   const items = [
     {
       type:'navItem',
@@ -17,42 +18,43 @@ const SidenavItems = () => {
       icon:'file-text-o',
       text:'My profile',
       link:'/user',
-      restricted:false
+      restricted:true
     },
     {
       type:'navItem',
       icon:'file-text-o',
       text:'Add Admins',
       link:'/user/register',
-      restricted:false
+      restricted:true
     },
     {
       type:'navItem',
       icon:'sign-in',
       text:'Login',
       link:'/login',
-      restricted:false
+      restricted:false,
+      exclude:true
     },
     {
       type:'navItem',
       icon:'file-text-o',
       text:'My reviews',
       link:'/user/user-reviews',
-      restricted:false
+      restricted:true
     },
     {
       type:'navItem',
       icon:'file-text-o',
       text:'Add reviews',
       link:'/user/add',
-      restricted:false
+      restricted:true
     },
     {
       type:'navItem',
       icon:'sign-out',
       text:'Logout',
       link:'/user/logout',
-      restricted:false
+      restricted:true
     }
   ]
 
@@ -66,9 +68,21 @@ const SidenavItems = () => {
   );
 
   const showItems = ()=>(
+    user.login?
+    
     items.map((item, i)=>{
-      return element(item, i)
+      if(user.login.isAuth){
+        return !item.exclude ?
+          element(item, i)
+          :null
+      }else{
+        return !item.restricted ?
+          element(item, i)
+        :null
+      }
+      
     })
+    :null
   );
 
   return (
@@ -78,4 +92,10 @@ const SidenavItems = () => {
   );
 };
 
-export default SidenavItems;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(SidenavItems);
